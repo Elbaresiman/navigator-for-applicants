@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-навигатор ИУБиП | Профориентационный тест</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .answer-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateX(5px);
+        }
+
+        .answer-option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        }
+
+        .answer-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            margin-right: 15px;
+            position: relative;
+        }
+
+        .answer-option.selected .answer-radio {
+            border-color: #667eea;
+            background: #667eea;
+            box-shadow: inset 0 0 0 4px white;
+        }
+
+        .answer-text {
+            flex: 1;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.prev {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .nav-btn.submit {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            color: white;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .results-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .results-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            width: 150px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .bar {
+            flex: 1;
+            height: 35px;
+            background: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 8px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .final-text {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .share-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            background: #667eea;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #ff6b6b;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .bar-label {
+                width: 100px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 IT-навигатор ИУБиП</h1>
+            <p>Пройдите тест и узнайте, какая IT-специальность вам подходит</p>
+        </div>
+
+        <div id="questionsContainer"></div>
+
+        <div id="resultsContainer" class="hidden"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let sessionId = localStorage.getItem('sessionId') || generateSessionId();
+
+        localStorage.setItem('sessionId', sessionId);
+
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        async function loadQuestions() {
+            try {
+                const response = await fetch(`${API_URL}/questions`);
+                if (!response.ok) throw new Error('Ошибка загрузки вопросов');
+                questions = await response.json();
+                console.log('Загружено вопросов:', questions.length);
+                renderQuestion();
+                updateProgress();
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('questionsContainer').innerHTML = `
+                    <div class="question-card">
+                        <div class="question-text" style="color: red;">
+                            ⚠️ Ошибка подключения к серверу. Убедитесь, что бэкенд запущен на ${API_URL}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function renderQuestion() {
+            if (!questions.length || currentQuestionIndex >= questions.length) return;
+
+            const question = questions[currentQuestionIndex];
+            const savedAnswer = userAnswers[question.question_id];
+
+            const html = `
+                <div class="question-card">
+                    <div class="question-number">Вопрос ${currentQuestionIndex + 1} из ${questions.length}</div>
+                    <div class="question-text">${question.text}</div>
+                    <div class="answers">
+                        ${question.answers.map((answer, idx) => `
+                            <div class="answer-option ${savedAnswer === idx ? 'selected' : ''}" data-answer-id="${idx}">
+                                <div class="answer-radio"></div>
+                                <div class="answer-text">${escapeHtml(answer.text)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="navigation">
+                        <button class="nav-btn prev" ${currentQuestionIndex === 0 ? 'disabled' : ''}>← Назад</button>
+                        ${currentQuestionIndex === questions.length - 1 
+                            ? '<button class="nav-btn submit" id="submitBtn">✨ Завершить тест</button>'
+                            : '<button class="nav-btn next">Далее →</button>'}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('questionsContainer').innerHTML = html;
+            attachEventListeners();
+        }
+
+        function attachEventListeners() {
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const answerId = parseInt(option.dataset.answerId);
+                    const question = questions[currentQuestionIndex];
+                    userAnswers[question.question_id] = answerId;
+                    
+                    document.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                });
+            });
+
+            const prevBtn = document.querySelector('.nav-btn.prev');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentQuestionIndex > 0) {
+                        currentQuestionIndex--;
+                        renderQuestion();
+                        updateProgress();
+                    }
+                });
+            }
+
+            const nextBtn = document.querySelector('.nav-btn.next');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (userAnswers[questions[currentQuestionIndex].question_id] !== undefined) {
+                        if (currentQuestionIndex < questions.length - 1) {
+                            currentQuestionIndex++;
+                            renderQuestion();
+                            updateProgress();
+                        }
+                    } else {
+                        alert('Пожалуйста, выберите ответ');
+                    }
+                });
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', submitTest);
+            }
+        }
+
+        async function submitTest() {
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[questions[i].question_id] === undefined) {
+                    alert(`Пожалуйста, ответьте на вопрос ${i + 1}`);
+                    currentQuestionIndex = i;
+                    renderQuestion();
+                    updateProgress();
+                    return;
+                }
+            }
+
+            const answersList = Object.entries(userAnswers).map(([qId, aId]) => ({
+                question_id: parseInt(qId),
+                answer_id: aId
+            }));
+
+            try {
+                const submitResponse = await fetch(`${API_URL}/submit-test`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        session_id: sessionId,
+                        answers: answersList
+                    })
+                });
+
+                if (!submitResponse.ok) throw new Error('Ошибка отправки');
+
+                const resultsResponse = await fetch(`${API_URL}/results/${sessionId}`);
+                if (!resultsResponse.ok) throw new Error('Ошибка получения результатов');
+                
+                const results = await resultsResponse.json();
+                showResults(results);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Произошла ошибка при обработке теста. Попробуйте ещё раз.');
+            }
+        }
+
+        function showResults(results) {
+            document.getElementById('questionsContainer').classList.add('hidden');
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.classList.remove('hidden');
+
+            const percentages = results.percentages;
+            const recommendations = results.recommendations;
+
+            let html = `
+                <div class="results-container">
+                    <h2 class="results-title">📊 Ваши результаты</h2>
+                    
+                    <!-- Блок 1: Радар (пока сделаем простыми барами) -->
+                    <div class="chart-container">
+                        <div class="chart-title">🎯 Ваш профиль цифрового сознания</div>
+                        <div class="bar-chart">
+                            ${renderBar('Когнитивная', percentages.meta.cognitive)}
+                            ${renderBar('Социально-коммуникативная', percentages.meta.social)}
+                            ${renderBar('Цифровая', percentages.meta.digital)}
+                        </div>
+                    </div>
+
+                    <!-- Блок 2: Рекомендуемые специальности -->
+                    <div class="chart-container">
+                        <div class="chart-title">💼 Какая специальность подходит</div>
+                        <div class="bar-chart">
+                            ${renderSpecsBar(results.recommendations.top_specs, percentages.specs)}
+                        </div>
+                    </div>
+
+                    <!-- Блок 3: Подкомпетенции -->
+                    <div class="chart-container">
+                        <div class="chart-title">🧠 Интерактивный портрет компетенций</div>
+                        <div class="bar-chart">
+                            ${renderBar('Аналитическое мышление', percentages.sub.analytical)}
+                            ${renderBar('Критическое мышление', percentages.sub.critical)}
+                            ${renderBar('Командное взаимодействие', percentages.sub.team)}
+                            ${renderBar('Цифровая грамотность', percentages.sub.digital_lit)}
+                            ${renderBar('Цифровой этикет', percentages.sub.digital_ethic)}
+                            ${renderBar('Эмоциональный интеллект', percentages.sub.emotional)}
+                        </div>
+                    </div>
+
+                    <!-- Финальный текст -->
+                    <div class="final-text">
+                        ${results.final_text.replace(/\n/g, '<br>')}
+                    </div>
+
+                    <!-- Кнопки -->
+                    <div class="share-buttons">
+                        <button class="share-btn" onclick="shareResults()">🔗 Поделиться результатами</button>
+                        <button class="share-btn reset-btn" onclick="resetTest()">🔄 Пройти тест заново</button>
+                    </div>
+                </div>
+            `;
+
+            resultsContainer.innerHTML = html;
+        }
+
+        function renderBar(label, percent) {
+            return `
+                <div class="bar-item">
+                    <div class="bar-label">${label}</div>
+                    <div class="bar">
+                        <div class="bar-fill" style="width: ${percent}%">${percent}%</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSpecsBar(topSpecs, specsPercentages) {
+            const specNames = {
+                '09.02.07': '09.02.07 Информационные системы (колледж)',
+                '09.02.11': '09.02.11 Информационные системы (колледж)',
+                '09.02.12': '09.02.12 Информационная безопасность (колледж)',
+                '09.03.03': '09.03.03 Прикладная информатика (бакалавриат)',
+                '38.03.05': '38.03.05 Бизнес-информатика (бакалавриат)'
+            };
+
+            let html = '';
+            for (const spec of topSpecs) {
+                const percent = specsPercentages[spec] || 0;
+                html += `
+                    <div class="bar-item">
+                        <div class="bar-label">${specNames[spec] || spec}</div>
+                        <div class="bar">
+                            <div class="bar-fill" style="width: ${percent}%; background: linear-gradient(90deg, #11998e, #38ef7d)">
+                                ${percent}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            return html;
+        }
+
+        async function shareResults() {
+            try {
+                const response = await fetch(`${API_URL}/share/generate/${sessionId}`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                await navigator.clipboard.writeText(data.share_url);
+                alert(`Ссылка скопирована!\n${data.share_url}`);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Не удалось создать ссылку для публикации');
+            }
+        }
+
+        function resetTest() {
+            userAnswers = {};
+            currentQuestionIndex = 0;
+            sessionId = generateSessionId();
+            localStorage.setItem('sessionId', sessionId);
+            
+            document.getElementById('questionsContainer').classList.remove('hidden');
+            document.getElementById('resultsContainer').classList.add('hidden');
+            
+            renderQuestion();
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const container = document.querySelector('.progress-container');
+            if (!container && questions.length > 0) {
+                const progressHtml = `
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text"></div>
+                    </div>
+                `;
+                document.getElementById('questionsContainer').insertAdjacentHTML('afterbegin', progressHtml);
+            }
+            
+            if (questions.length > 0) {
+                const answered = Object.keys(userAnswers).length;
+                const percent = (answered / questions.length) * 100;
+                const fill = document.querySelector('.progress-fill');
+                const text = document.querySelector('.progress-text');
+                if (fill) fill.style.width = `${percent}%`;
+                if (text) text.textContent = `Готовность: ${answered} из ${questions.length} вопросов`;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Запускаем загрузку
+        loadQuestions();
+    </script>
+</body>
+</html>
