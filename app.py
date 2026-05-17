@@ -163,7 +163,7 @@ async def submit_test(request: SubmitTestRequest):
     logger.info(f"Получен тест для session_id: {request.session_id}")
     logger.info(f"Количество ответов: {len(request.answers)}")
     
-    if not validate_answers_list(request.answers):
+    if not validate_answers(request.answers):
         raise HTTPException(status_code=400, detail="Невалидные ответы")
     
     try:
@@ -280,22 +280,6 @@ def validate_requests(answers: List[dict]) -> bool:
     
     required = set(range(1, 18))
     return required.issubset(question_ids)
-
-def validate_answers_list(answers: List[AnswerItem]) -> bool:
-    """Проверяет, что все ответы валидны"""
-    if not answers:
-        return False
-    
-    for answer in answers:
-        if answer.question_id < 0 or answer.question_id > 17:
-            logger.warning(f"Некорректный question_id: {answer.question_id}")
-            return False
-        
-        if answer.answer_id < 0:
-            logger.warning(f"Некорректный answer_id: {answer.answer_id}")
-            return False
-    
-    return True
 
 def get_missing_questions(answers_list: List[dict]) -> List[int]:
     """Возвращает список ID вопросов, на которые нет ответов"""
