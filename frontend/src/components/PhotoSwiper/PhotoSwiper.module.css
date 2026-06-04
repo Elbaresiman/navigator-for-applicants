@@ -1,0 +1,231 @@
+.swiperContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  overflow: hidden;
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  overscroll-behavior: contain;
+}
+
+.swiper {
+  padding: 10px 0 30px;
+  overflow: hidden;
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+}
+
+.swiper-wrapper {
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+}
+
+.swiper-slide {
+  touch-action: pan-y;
+  overflow: hidden;
+}
+
+.photoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 4px;
+  touch-action: pan-y;
+}
+
+.photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-photo);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: pan-y;
+}
+
+.photo:hover {
+  transform: scale(1.05);
+}
+
+.caption {
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-accent);
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+  touch-action: pan-y;
+}
+
+.lightboxBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  font-size: 36px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  z-index: 10001;
+  line-height: 1;
+}
+
+.lightboxClose:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lightboxContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+}
+
+.lightboxSwiper {
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.lightboxSwiper .swiper-wrapper {
+  touch-action: pan-y;
+}
+
+.lightboxSwiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+}
+
+.lightboxSlide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.lightboxImage {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.lightboxCounter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 20px;
+  z-index: 10001;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lightbox .swiper-button-next,
+.lightbox .swiper-button-prev {
+  color: #fff;
+  z-index: 10002;
+}
+
+.lightbox .swiper-button-next::after,
+.lightbox .swiper-button-prev::after {
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .photo {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .swiperContainer {
+    padding: 10px 0;
+  }
+  
+  .lightboxClose {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+  
+  .lightboxImage {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+  
+  .lightboxCounter {
+    bottom: 16px;
+    font-size: 12px;
+  }
+  
+  .lightbox .swiper-button-next,
+  .lightbox .swiper-button-prev {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .photo {
+    width: 140px;
+    height: 140px;
+  }
+}

@@ -1,0 +1,48 @@
+.chartContainer {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+  margin: 24px auto;
+  max-width: 800px;
+  width: calc(100% - 40px);
+  overflow: hidden;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.chartWrapper {
+  height: 400px;
+  width: 100%;
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .chartContainer {
+    padding: 20px;
+    margin: 16px 0;
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .chartWrapper {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chartWrapper {
+    height: 300px;
+  }
+}

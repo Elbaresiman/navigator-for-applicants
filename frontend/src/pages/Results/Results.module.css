@@ -1,0 +1,279 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding-top: 100px;
+  padding-bottom: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.downloadContent {
+  width: 100%;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 24px;
+}
+
+.errorText {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.resultCard {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+  margin: 24px auto;
+  max-width: 800px;
+  width: calc(100% - 40px);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.resultTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gradientText {
+  background: linear-gradient(90deg, var(--color-accent-2), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.titleIcon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.labelIcon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+  color: var(--color-accent-2);
+  flex-shrink: 0;
+}
+
+.resultContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resultItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.resultLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.resultValue {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.finalText {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  text-align: center;
+  padding: 16px;
+  background: var(--color-option-bg);
+  border-radius: 12px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.finalText h2 {
+  font-size: 18px;
+  margin: 20px 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finalText h2:first-child {
+  margin-top: 0;
+}
+
+.finalText hr {
+  color: black;
+  margin: 20px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.finalText strong {
+  color: var(--color-accent-2);
+  font-weight: 600;
+}
+
+.finalText em {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.downloadButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--color-accent-2);
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.downloadButton:hover:not(:disabled) {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.02);
+}
+
+.downloadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.restartButton {
+  padding: 14px 28px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.restartButton:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.restartButtonOutline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius-button);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.restartButtonOutline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-top: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .pageTitle {
+    font-size: 20px;
+  }
+  
+  .resultCard {
+    padding: 20px;
+    margin: 16px 0;
+    width: 100%;
+  }
+  
+  .resultTitle {
+    font-size: 18px;
+  }
+
+  .titleIcon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .resultLabel, .resultValue {
+    font-size: 14px;
+  }
+  
+  .finalText {
+    font-size: 14px;
+    padding: 12px;
+  }
+  
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .downloadButton, .restartButton, .restartButtonOutline {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}

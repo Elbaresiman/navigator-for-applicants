@@ -1,0 +1,163 @@
+.radarContainer {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+  margin: 24px auto;
+  max-width: 600px;
+  width: calc(100% - 40px);
+  overflow: hidden;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.chartWrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.radarSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Анимация появления полигона */
+.polygonAnim {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPoly 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes drawPoly {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Появление точек */
+.pointPop {
+  opacity: 0;
+  animation: pointAppear 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pointAppear {
+  0% {
+    opacity: 0;
+    r: 0;
+  }
+  70% {
+    opacity: 1;
+    r: 6;
+  }
+  100% {
+    opacity: 1;
+    r: 5;
+  }
+}
+
+/* Пульс вокруг точек */
+.pointPulse {
+  animation: pulseRing 2.5s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    opacity: 0.25;
+    r: 5;
+  }
+  50% {
+    opacity:0;
+    r: 14;
+  }
+  100% {
+    opacity: 0;
+    r: 14;
+  }
+}
+
+/* Фоновое кольцо */
+.bgRing {
+  animation: ringPulse 4s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 0.8;
+    stroke-width: 2;
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 3;
+  }
+}
+
+/* Подписи */
+.axisLabel {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #1A2A3A;
+  font-family: var(--font-main);
+}
+
+.axisValue {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--color-accent);
+  font-family: var(--font-main);
+}
+
+.levelLabel {
+  font-size: 9px;
+  fill: #8FA1B3;
+  font-family: var(--font-main);
+  opacity: 0.7;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .radarContainer {
+    padding: 20px;
+    margin: 16px 0;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .chartWrapper {
+    max-width: 300px;
+  }
+
+  .axisLabel {
+    font-size: 11px;
+  }
+
+  .axisValue {
+    font-size: 10px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,19 @@
+.footer {
+  background: var(--color-text);
+  color: var(--color-white);
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+  font-size: 14px;
+}
+
+.footer p {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 16px;
+    font-size: 12px;
+  }
+}
