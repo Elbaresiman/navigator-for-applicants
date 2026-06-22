@@ -7,7 +7,7 @@ const Header = () => {
       <div className={styles.headerContent}>
         <img src={logo} alt="ИУБиП" className={styles.logo} />
         <p className={styles.subtitle}>
-          Профориентационный бот для абитуриентов Академии Цифрового Развития
+          Профориентационный бот для абитуриентов<br />Академии Цифрового Развития
         </p>
       </div>
     </header>
