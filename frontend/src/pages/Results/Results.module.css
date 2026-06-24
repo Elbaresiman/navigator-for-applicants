@@ -6,7 +6,7 @@
 
 .main {
   flex: 1;
-  padding-top: 100px;
+  padding-top: 20px;
   padding-bottom: 40px;
   max-width: 1000px;
   margin: 0 auto;
@@ -233,7 +233,7 @@
 
 @media (max-width: 768px) {
   .main {
-    padding-top: 80px;
+    padding-top: 20px;
     padding-left: 16px;
     padding-right: 16px;
   }

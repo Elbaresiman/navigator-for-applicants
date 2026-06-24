@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -28,6 +29,14 @@ const BarChart = ({ type, data, level_filter }) => {
 };
 
 const HorizontalBarChart = ({ data, level_filter }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const filteredSpecs = Object.entries(data.specs_percent || {})
     .filter(([code]) => {
       if (level_filter === 'all') return true;
@@ -40,7 +49,7 @@ const HorizontalBarChart = ({ data, level_filter }) => {
   const labels = filteredSpecs.map(([code]) => {
     const spec = specialties[code];
     if (!spec) return code;
-    const levelText = spec.level === 'college' ? 'Колледж' : 'Бакалавр';
+    const levelText = spec.level === 'college' ? 'Колледж' : 'Бакалавриат';
     return `${spec.name} — ${levelText}`;
   });
   const values = filteredSpecs.map(([, value]) => value);
@@ -60,7 +69,7 @@ const HorizontalBarChart = ({ data, level_filter }) => {
         }),
         borderWidth: 1,
         borderRadius: 8,
-        barThickness: 28
+        barThickness: isMobile? 18 : 28
       }
     ]
   };
@@ -71,7 +80,7 @@ const HorizontalBarChart = ({ data, level_filter }) => {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        right: 20
+        right: isMobile? 8 : 20
       }
     },
     scales: {
@@ -93,7 +102,7 @@ const HorizontalBarChart = ({ data, level_filter }) => {
           display: false
         },
         ticks: {
-          font: { size: 12, weight: '500' },
+          font: { size: isMobile? 9 : 12, weight: '500' },
           color: '#1A2A3A',
           crossAlign: 'far',
           autoSkip: false,
@@ -102,7 +111,7 @@ const HorizontalBarChart = ({ data, level_filter }) => {
             const words = label.split(' ');
             const lines = [];
             let currentLine = '';
-            const maxCharsPerLine = 30;
+            const maxCharsPerLine = isMobile? 15 : 30;
             
             for (const word of words) {
               if ((currentLine + ' ' + word).trim().length > maxCharsPerLine) {
@@ -122,8 +131,8 @@ const HorizontalBarChart = ({ data, level_filter }) => {
       legend: { display: false },
       tooltip: {
         backgroundColor: '#1A2A3A',
-        titleFont: { size: 12 },
-        bodyFont: { size: 12 },
+        titleFont: { size: isMobile? 8 : 12 },
+        bodyFont: { size: isMobile? 10 : 12 },
         padding: 10,
         cornerRadius: 8,
         callbacks: {
@@ -150,6 +159,14 @@ const HorizontalBarChart = ({ data, level_filter }) => {
 };
 
 const VerticalBarChart = ({ data }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const labels = Object.keys(data.sub_percent || {}).map(
     key => subCompetencies[key] || key
   );
@@ -201,7 +218,7 @@ const VerticalBarChart = ({ data }) => {
           display: false
         },
         ticks: {
-          font: { size: 11, weight: '500' },
+          font: { size: isMobile? 9 : 11, weight: '500' },
           color: '#1A2A3A',
           maxRotation: 45,
           minRotation: 0,
@@ -218,8 +235,8 @@ const VerticalBarChart = ({ data }) => {
       legend: { display: false },
       tooltip: {
         backgroundColor: '#1A2A3A',
-        titleFont: { size: 12 },
-        bodyFont: { size: 12 },
+        titleFont: { size: isMobile? 10 : 12 },
+        bodyFont: { size: isMobile? 10 : 12 },
         padding: 10,
         cornerRadius: 8,
         callbacks: {

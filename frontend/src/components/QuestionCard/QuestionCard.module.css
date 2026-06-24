@@ -61,7 +61,8 @@
 @media (max-width: 768px) {
   .questionCard {
     padding: 20px;
-    margin: 0 16px;
+    margin: 16px 0;
+    width: 100%;
   }
   
   .questionText {

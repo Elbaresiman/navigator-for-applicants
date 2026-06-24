@@ -94,7 +94,8 @@
 @media (max-width: 768px) {
   .container {
     padding: 20px;
-    margin: 16px;
+    margin: 16px 0;
+    width: 100%;
   }
   
   .linksGrid {
