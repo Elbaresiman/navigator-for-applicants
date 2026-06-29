@@ -111,7 +111,7 @@ const HorizontalBarChart = ({ data, level_filter }) => {
             const words = label.split(' ');
             const lines = [];
             let currentLine = '';
-            const maxCharsPerLine = isMobile? 15 : 30;
+            const maxCharsPerLine = isMobile? 20 : 30;
             
             for (const word of words) {
               if ((currentLine + ' ' + word).trim().length > maxCharsPerLine) {

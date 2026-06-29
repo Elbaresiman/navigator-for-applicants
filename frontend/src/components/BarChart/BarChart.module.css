@@ -37,12 +37,12 @@
   }
   
   .chartWrapper {
-    height: 350px;
+    height: 400px;
   }
 }
 
 @media (max-width: 480px) {
   .chartWrapper {
-    height: 300px;
+    height: 400px;
   }
 }
